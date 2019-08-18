@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+    before_action :authenticate
     #   encode token
     #   get headres and decode token
     #   authorize user with the token
@@ -29,6 +30,8 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate
-        render json: {error: 'unauthorized'}, status: 401, unless logged_in?
+        if !logged_in?
+            render json: {error: "unauthorized"}, status: 401 
+        end
     end
 end
