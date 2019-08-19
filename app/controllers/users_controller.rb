@@ -7,7 +7,8 @@ class UsersController < ApplicationController
         if user.valid?
             user.save
             token = encode_token(user.id)
-            render json: { jwt: token }
+            posts = user.posts.count > 0 ? PostSerializer.new(user.posts) : []
+            render json: { jwt: token, posts: posts }
         else
             render json: { error: 'user not created, input correct values' }
         end 
