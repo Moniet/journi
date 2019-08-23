@@ -9,6 +9,18 @@ class PostsController < ApplicationController
         end
     end
 
+    def update
+        posts =  current_user.posts
+        if post
+            posts.find {|post| post.id === params[:id]}
+        else
+            render json: { errors: 'operation failed' }
+        end
+    end
+
+    def destroy
+    end
+
     private 
 
     def post_params
