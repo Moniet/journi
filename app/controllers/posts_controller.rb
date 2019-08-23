@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
     def create
-        if current_user.
+        if current_user
             post = current_user.posts.build(post_params)
             if post.valid?
                 post.save
-                render json: { post }
+                render json: post 
             end
         end
     end
