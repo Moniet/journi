@@ -17,7 +17,6 @@ class PostsController < ApplicationController
         posts =  current_user.posts
         if post
             posts.find {|post| post.id === params[:id]}
-
             render json: {errors: 'successfully updated'}, status: :ok
         else
             render json: { errors: 'operation failed' }, status: :unauthorized
