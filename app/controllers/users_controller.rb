@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate
+    skip_before_action :authenticate, only: [:create]
 
     def create
         user = User.new(user_params)
@@ -11,6 +11,15 @@ class UsersController < ApplicationController
         else
             render json: { error: 'user not created, input correct values' }, status: :not_acceptable
         end 
+    end
+
+    def user_posts
+        if current_user
+            posts = current_user.posts.count > 0 ? PostSerializer.new(current_user.posts) : []
+            render json: { posts: posts }, status: :ok
+        else
+            render json: { error: 'unauthorized' }, status: :unauthorized
+        end
     end
 
     private 
