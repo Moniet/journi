@@ -7,7 +7,7 @@ class AuthController < ApplicationController
             token = encode_token(user_id: user.id)
             render json: { jwt: token }
         else 
-            render json: { error: 'Inavlid username / password' }
+            render json: { errors: 'Inavlid username / password' }, status: :unauthorized
         end
     end
 

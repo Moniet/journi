@@ -6,10 +6,9 @@ class UsersController < ApplicationController
         if user.valid?
             user.save
             token = encode_token(user.id)
-            posts = user.posts.count > 0 ? PostSerializer.new(user.posts) : []
-            render json: { jwt: token, posts: posts }, status: :created
+            render json: { jwt: token }, status: :created
         else
-            render json: { error: 'user not created, input correct values' }, status: :not_acceptable
+            render json: { errors: user.errors.full_messages }, status: :not_acceptable
         end 
     end
 
@@ -18,7 +17,7 @@ class UsersController < ApplicationController
             posts = current_user.posts.count > 0 ? PostSerializer.new(current_user.posts) : []
             render json: { posts: posts }, status: :ok
         else
-            render json: { error: 'unauthorized' }, status: :unauthorized
+            render json: { errors: 'unauthorized' }, status: :unauthorized
         end
     end
 
