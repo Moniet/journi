@@ -6,13 +6,13 @@ class ApplicationController < ActionController::API
     end
 
     def encode_token(payload)
-        JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
+        JWT.encode(payload, ENV['SECRET_KEY_BASE'], 'HS256')
     end
 
     def decoded_token
         if auth_header
             token = auth_header.split(' ')[1]
-            JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' })
+            JWT.decode(token, ENV['SECRET_KEY_BASE'], true, { algorithm: 'HS256' })
         end
     end
 
