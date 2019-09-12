@@ -1,5 +1,7 @@
 # [Journi | Digital Journal ](http://journi.netlify.com)
 
+[frontend repo](https://github.com/Moniet/journi-frontend)
+
 Welcome to Journi, a digital journalling application where you can store your thoughts.
 
 ## GETTING STARTED IN 4 STEPS
