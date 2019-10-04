@@ -1,17 +1,20 @@
-module Mutations
-    class CreatePost< BaseMutation
-      # arguments passed to the `resolved` method
-      argument :title, String, required: true
-      argument :body, String, required: true
-  
-      # return type from the mutation
-      type Types::PostType
-  
-      def resolve(title: nil, body: nil)
-        Post.create!(
-          title: title,
-          body: body,
-        )
-      end
-    end
-  end
+# module Mutations
+#     class CreatePost < BaseMutation
+#         argument :title, String, required: true
+#         argument :body, String, required: true
+#         argument :token, String, required: true
+
+#         field :post, Types::PostType, null: false
+#         field :errors, [String], null: false
+
+#         def resolve(description, url, token)
+#             token = 
+#             post = Post.new(
+#                 title: title,
+#                 body: body,
+#             )
+
+#             if 
+#         end
+#     end
+# end
