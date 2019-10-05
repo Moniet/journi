@@ -1,34 +1,30 @@
-class Mutations::UpdatePost < Mutations::BaseMutation
+class Mutations::DeletePost < Mutations::BaseMutation
     argument :id, String, required: true
-    argument :title, String, required: true
-    argument :body, String, required: true
     argument :token, String, required: true
   
     field :message, String, null: true
-    field :errors, [String], null: false
+    field :errors, String, null: true
   
-    def resolve(id:, title:,body:, token:)
+    def resolve(id:, token:)
         decoded_token = JWT.decode(token, ENV['SECRET_KEY_BASE'], true, { algorithm: 'HS256' })
         user = User.find decoded_token[0]["user_id"]
-        
 
         if user
             posts = user.posts
             post = posts.find(id.to_i)
-            post.update_attributes(title: title, body: body)
-            if post
+        
+            if post.destroy
                 {
-                    message: 'successfuully updated',
-                    errors: []
+                    message: 'successfuully deleted',
                 }
             else
                 {
-                    errors: post.errors.full_messages,
+                    errors: 'post was not deleted',
                 }
             end
         else 
             {
-                errors: ['unauthorized access']
+                errors: 'unauthorized access'
             }
         end
     end
