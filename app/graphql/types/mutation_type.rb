@@ -5,6 +5,7 @@ module Types
     description: "An example field added by the generator"
 
     field :create_user, mutation: Mutations::CreateUser
+    field :login_user, mutation: Mutations::LoginUser
 
     def test_field
       "Hello World"

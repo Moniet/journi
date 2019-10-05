@@ -5,7 +5,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user
     }
     result = JourniBackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -15,6 +15,27 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def auth_header
+      request.headers['Authorization']
+  end
+
+  def encode_token(payload)
+      JWT.encode(payload, ENV['SECRET_KEY_BASE'], 'HS256')
+  end
+
+  def decoded_token
+      if auth_header
+          token = auth_header.split(' ')[1]
+          JWT.decode(token, ENV['SECRET_KEY_BASE'], true, { algorithm: 'HS256' })
+      end
+  end
+
+  def current_user
+      if decoded_token
+          user = User.find(decoded_token[0]["user_id"])
+      end
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)

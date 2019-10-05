@@ -27,3 +27,5 @@
 /config/master.key
 
 /config/secrets.yml
+/config/application.yml
+config/application.yml
