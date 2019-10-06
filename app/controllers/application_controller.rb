@@ -16,19 +16,19 @@ class ApplicationController < ActionController::API
     #     end
     # end
 
-    # # def current_user
-    # #     if decoded_token
-    # #         user = User.find(decoded_token[0]["user_id"])
-    # #     end
-    # # end
+    # def current_user
+    #     if decoded_token
+    #         user = User.find(decoded_token[0]["user_id"])
+    #     end
+    # end
 
-    # # def logged_in?
-    # #     !!current_user
-    # # end
+    # def logged_in?
+    #     !!current_user
+    # end
 
-    # # def authenticate
-    # #     if !logged_in?
-    # #         render json: {error: "unauthorized"}, status: 401 
-    # #     end
-    # # end
+    # def authenticate
+    #     if !logged_in?
+    #         render json: {error: "unauthorized"}, status: 401 
+    #     end
+    # end
 end

@@ -10,7 +10,8 @@ module Types
     field :posts, [PostType], null: true
 
     def posts
-      Post.all
+      user = context[:current_user]
+      user ? context[:current_user].posts : []
     end
 
     def test_field

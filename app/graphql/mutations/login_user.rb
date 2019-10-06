@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Mutations::LoginUser < Mutations::BaseMutation
     argument :username, String, required: true
     argument :password, String, required: true
