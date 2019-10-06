@@ -19,7 +19,7 @@ class Mutations::LoginUser < Mutations::BaseMutation
         else
             {
                 user: nil,
-                errors: user.errors.full_messages,
+                errors: 'user doesnt exist',
             }
         end
     end

@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Mutations::CreateUser < Mutations::BaseMutation
     argument :name, String, required: true
     argument :username, String, required: true
@@ -9,7 +11,6 @@ class Mutations::CreateUser < Mutations::BaseMutation
   
     def resolve(name:, username:,password:)
       user = User.new(name: name, username: username, password: password)
-
       if user.save
         {
           user: user,

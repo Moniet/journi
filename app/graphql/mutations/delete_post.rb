@@ -1,14 +1,12 @@
 class Mutations::DeletePost < Mutations::BaseMutation
-    argument :id, String, required: true
-    argument :token, String, required: true
+    argument :id, ID, required: true
   
     field :message, String, null: true
     field :errors, String, null: true
   
-    def resolve(id:, token:)
-        decoded_token = JWT.decode(token, ENV['SECRET_KEY_BASE'], true, { algorithm: 'HS256' })
-        user = User.find decoded_token[0]["user_id"]
-
+    def resolve(id:)
+        user = context[:current_user]
+        
         if user
             posts = user.posts
             post = posts.find(id.to_i)
@@ -24,7 +22,7 @@ class Mutations::DeletePost < Mutations::BaseMutation
             end
         else 
             {
-                errors: 'unauthorized access'
+                errors: 'unauthorized change'
             }
         end
     end
