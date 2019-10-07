@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Mutations::CreateUser < Mutations::BaseMutation
     argument :name, String, required: true
     argument :username, String, required: true
